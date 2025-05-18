@@ -4,6 +4,7 @@ import logo from "../assets/logo.png";
 
 function Navbar() {
   return (
+    //brukte header for semantisk struktur.
     <header className="navbar">
       <Link to="/" className="logo-link">
         <img src={logo} alt="Billettlyst logo" className="logo-img" />
