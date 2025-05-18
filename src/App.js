@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
+    //blir brukt for å aktivere react router funksjonalitet.
     <Router>
       <Navbar/> 
       <Routes>
