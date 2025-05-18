@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import ArtistCard from "../components/ArtistCard";
 
 function EventPage() {
+   // dette henter id´er fra URL, /event/:id. kilde brukt: https://reactrouter.com/en/main/hooks/use-params
   const { id } = useParams();
   const [event, setEvent] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    //henter eventdata fra ticketmaster API. kilde som blir brukt er fra fetch og async/wait:https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
     const fetchEvent = async () => {
       try {
         const response = await fetch(
@@ -25,7 +27,8 @@ function EventPage() {
 
     fetchEvent();
   }, [id]);
-  const artists = event?._embedded?.attractions || []; //D-KRAV: Henter ut artister fra event
+  // dette under er da d-kravet som henter artister ut med _embedded.attractions. Kilde brukt: https://developer.ticketmaster.com/products-and-docs/apis/discovery-api/v2/#search-events-v2
+  const artists = event?._embedded?.attractions || []; 
 
   if (error) return <p style={{ color: "red" }}>Feil: {error}</p>;
   if (!event) return <p>Laster ned...</p>;
@@ -40,6 +43,7 @@ function EventPage() {
           style={{ width: "100%", maxWidth: "600px", borderRadius: "10px" }}
         />
       )}
+      {/* vises informasjon med fallback hvis data mangler. bruker optional chaining her. */}
       <p>
         <strong>Sted:</strong>{" "}
         {event._embedded?.venues?.[0]?.name || "Ikke oppgitt"}
@@ -56,7 +60,8 @@ function EventPage() {
         Kjøp billetter
       </a>
 
-      {artists.length > 0 && ( //D-krav, Artistkort
+      {/* D-krav som siser artistcard-komponenter hvis artister finnes for arrangamentene:*/}
+      {artists.length > 0 && ( 
         <>
           <h2 style={{ marginTop: "2rem" }}>Artister</h2>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
