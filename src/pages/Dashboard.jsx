@@ -3,10 +3,13 @@ import EventCard from "../components/EventCard";
 import "./Dashboard.css";
 
 function Dashboard() {
+  // her bruker jeg react useState-hook til enkel formtilstand og innlogging
+  //kilde brukt: https://react.dev/reference/react/useState
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  //hardkodet den delen som viser lagrede arrangementer etter innlogging, blir løst uten backend eller lagring som blir lagret lokalt.
   const savedEvents = [
     {
       id: "Z698xZb_Z16vbf7834",
@@ -22,6 +25,7 @@ function Dashboard() {
     },
   ];
 
+  //en form for innlogging med bare e-post og passord som kan bli fylles ut:
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
