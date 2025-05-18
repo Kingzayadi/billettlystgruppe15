@@ -41,7 +41,7 @@ function Home() {
 
   return (
     <main>
-      <h1>Festivaler</h1>
+      <h1 style={{ textAlign: "center" }}>Festivaler</h1>
 
       {missing.length > 0 && (
         <p style={{ color: "orange" }}>

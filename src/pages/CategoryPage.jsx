@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import EventCard from "../components/EventCard"; 
+import "../App.css";
 
 const categoryKeywords = {
   musikk: "concert",
@@ -23,7 +24,7 @@ function CategoryPage() {
 
         const data = await response.json();
 
-        if (data._embedded && data._embedded.events) {
+        if (data._embedded?.events) {
           setEvents(data._embedded.events);
         } else {
           setEvents([]);
@@ -39,19 +40,13 @@ function CategoryPage() {
 
   return (
     <main>
-      <h1>{slug.toUpperCase()}</h1>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+      <h1 className="page-title">{slug.toUpperCase()}</h1>
+
+      {/* Her blir eventcard brukt for å hente ut bilde, navn, dato osv...*/}
+      <div className="event-grid">
         {events.length > 0 ? (
           events.map((event) => (
-            <div key={event.id} style={{ width: "200px", padding: "10px", boxShadow: "0 0 5px #ccc" }}>
-              <img
-                src={event.images?.[0]?.url}
-                alt={event.name}
-                style={{ width: "100%", height: "auto" }}
-              />
-              <h3>{event.name}</h3>
-              <Link to={`/event/${event.id}`}>Se mer detaljer</Link>
-            </div>
+            <EventCard key={event.id} event={event} />
           ))
         ) : (
           <p>Ingen arrangementer funnet</p>
