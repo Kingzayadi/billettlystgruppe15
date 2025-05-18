@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ArtistCard from "../components/ArtistCard";
 
 function EventPage() {
   const { id } = useParams();
@@ -24,6 +25,7 @@ function EventPage() {
 
     fetchEvent();
   }, [id]);
+  const artists = event?._embedded?.attractions || []; //D-KRAV: Henter ut artister fra event
 
   if (error) return <p style={{ color: "red" }}>Feil: {error}</p>;
   if (!event) return <p>Laster ned...</p>;
@@ -53,6 +55,18 @@ function EventPage() {
       >
         Kjøp billetter
       </a>
+
+      {artists.length > 0 && ( //D-krav, Artistkort
+        <>
+          <h2 style={{ marginTop: "2rem" }}>Artister</h2>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
+            {artists.map((artist) => (
+              <ArtistCard key={artist.id} artist={artist} />
+            ))}
+          </div>
+        </>
+      )}
+
     </main>
   );
 }

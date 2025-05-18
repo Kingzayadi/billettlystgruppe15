@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./Home.css";
+import EventCard from "../components/EventCard";
 
 function Home() {
   const [events, setEvents] = useState([]);
@@ -50,21 +50,14 @@ function Home() {
       )}
 
       <div className="event-grid">
-        {events.length > 0 ? (
-          events.map((event) => (
-            <div className="event-card" key={event.id}>
-              <img
-                src={event.images?.[0]?.url}
-                alt={event.name}
-                className="event-image"
-              />
-              <h3>{event.name}</h3>
-              <Link to={`/event/${event.id}`}>Se mer detaljer</Link>
-            </div>
-          ))
-        ) : (
-          <p>Laster inn festivaler...</p>
-        )}
+      {events.length > 0 ? (
+  events.map((event) => (
+    <EventCard key={event.id} event={event} />
+  ))
+) : (
+  <p>Laster inn festivaler...</p>
+)}
+
       </div>
     </main>
   );
