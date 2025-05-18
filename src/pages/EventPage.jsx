@@ -37,11 +37,13 @@ function EventPage() {
     <main style={{ padding: "2rem" }}>
       <h1>{event.name}</h1>
       {event.images && (
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: "1rem" }}>
         <img
           src={event.images[0].url}
           alt={event.name}
           style={{ width: "100%", maxWidth: "600px", borderRadius: "10px" }}
         />
+      </div>      
       )}
       {/* vises informasjon med fallback hvis data mangler. bruker optional chaining her. */}
       <p>
