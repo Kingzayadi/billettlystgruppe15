@@ -4,6 +4,7 @@ import EventPage from "./pages/EventPage";
 import CategoryPage from "./pages/CategoryPage";
 import Dashboard from "./pages/Dashboard";
 import Navbar from "./components/Navbar"; 
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/category/:slug" element={<CategoryPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
+        <Footer/>
     </Router>
   );
 }
